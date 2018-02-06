@@ -1,4 +1,4 @@
-\chapter{Unittests}
+\chapter{\gls{Unittest}s}
     \begin{flushleft}
     In diesem Abschnitt werden alle Unittests des Systems aufgelistet und kurz beschrieben. \newline
     Es ist von Django framework verlangt, dass alle Testmethoden mit dem Präfix \glqq test\grqq \ anfangen. \newline 
@@ -78,9 +78,10 @@
 		\end{tabularx}
 	\end{center}
 	
-	\section{CronTestCase}
 	
-	\section{SchedulerTestCase}
+	
+	\section{CronTestCase}
+	Innerhalb dieser Testklasse werden Methoden des Moduls cron.py getestet, durch einen Cron daemon in regelmäßigen Abständen ausgeführt werden.
 	
 	\begin{center}
 		\renewcommand{\arraystretch}{1.5}
@@ -90,9 +91,12 @@
 			\rowcolor[gray]{0.75}[4.85pt]
 			Name & Beschreibung \\ \hline
 			setUp & (Überschrieben) \newline Es werden die Testdaten in die Datenbank geschrieben. \\ \hline
-			test\_send\_task & Es wird ein Test Task ausgewählt und überprüft, dass man einen Response von Server bekommt und die status URL in die Datenbank geschrieben wird. \\ \hline
-			test\_execution & Führt einen Task auf und überprüft, ob in der Datenbank ein richtiges Ergebnis steht. \\ \hline
 			tearDown & (Überschrieben) \newline Es werden alle Datensätze aus der Datenbank gelöscht\\ \hline
+			test\_send\_task & Es wird ein Test Task ausgewählt und überprüft, dass man einen Response von Server bekommt und die status URL in die Datenbank geschrieben wird. \\ \hline
+			test\_execution & Führt einen Task aus und überprüft, ob in der Datenbank ein richtiges Ergebnis steht. \\ \hline
+			test\_update\_wps\_processes & Testet, ob die WPS Prozesse von einem im voraus gespeicherten WPS Server korrekt gesammelt und in der Datenbank gespeichert werden.\\ \hline
+			test\_update\_wps\_processes\_with\_empty\_database & Testet, ob bei einer leeren Datenbank (also, wenn es kein Server gespeichert ist) nichts gemacht wird. \\ \hline
+			
 		\end{tabularx}
 	\end{center}
 	
