@@ -1,0 +1,53 @@
+\chapter{Änderungen zum Entwurf}
+    
+    \section{Einleitung}
+        Dokumentation über Änderungen am Entwurf
+    
+    \section{Änderungen am Client}
+    
+    \section{Änderungen am Server}
+        Serverseitig wurde das System um das Modul utils.py erweitert, das grundsätzlich Funktionen für die Arbeit mit WPS Responses und der Datenbank gedacht ist. Funktionen sind leicht erweiterbar und können an anderen Stellen des Systems benutzt werden. \newline
+        InputOutput in Database
+        
+        complete cron
+        
+        
+        
+        \subsection{Änderungen an REST API}
+        
+		\begin{center}
+            \begin{tabularx}{\textwidth}{|l|X|}
+    			\hline
+    			\rowcolor[gray]{0.90}[4.85pt]
+    			Method & Änderung \\ \hline
+    			GET /user & Handler -> UserView.get \\ \hline
+    			GET /workflow\_refresh/:id & Neu hinzugefügt. Aktualisiert den Status des Workflows und der Tasks entsprechnend dem aktuellen Stand auf dem WPS Server \\ \hline
+    			POST /process & Rausgenommen \\ \hline
+    			PATCH /process/:id & Rausgenommen \\ \hline
+    			DELETE /process/:id & Rausgenommen \\ \hline
+    			POST /login & Neu hinzugefügt. Loggt den Benutzer ein  \\ \hline
+    		\end{tabularx}
+		\end{center}
+	
+	
+	
+    	\subsection{edu.kit.scc.pseworkflow.cron}
+    	Hier wird nicht django-cron sondern django-crontab verwendet, da dies wesentlich bequemer zu implementieren war und unseren Ansprüchen besser  entsprochen hat.
+    	
+    			Methoden:
+		\begin{center}
+			\setlength\tabcolsep{5pt}
+			\renewcommand{\arraystretch}{1.5}
+			
+			\begin{tabularx}{\textwidth}{|l|l|l|X|}
+				\hline
+				\rowcolor[gray]{0.90}[4.85pt]
+				Name & Rückgabetyp & Parameter & Beschreibung \\ \hline
+				schedule & void & - & Hauptmethode der schedule Funktion. Hier wird der Workflow entsprechend der Reihenfolge der Tasks ausgeführt. Die XML Dateien werden erstellt und dem Servern zur Ausführung geschickt \\ \hline
+				xml\_generator & void & string & Generiert die XML Datei für die auszuführede Tasks in dem übergebenen Pfad \\ \hline
+				create\_data\_doc & \makecell{lxml.etree.\\\_Element/int} & task & Hilfsmethode für xml\_generator \\ \hline
+				send\_task & void & \makecell{task\_id, \\xml\_dir} & Hilfsmethode für schedule. Sended Task an den WPS Server \\ \hline
+				get\_execute\_url & string & task & Hilfsmethode für send\_task. Holt die Ausführungs URL aus der Datenbank. \\ \hline
+				receiver & void & - & Hauptmethode der receiver Funktion. Hier werden die Ausführungsstatus der laufende Tasks überprüft. 
+			\end{tabularx}
+		\end{center}

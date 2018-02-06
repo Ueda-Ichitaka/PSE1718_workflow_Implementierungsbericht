@@ -1,0 +1,49 @@
+\chapter{Implementierte Features}
+    
+    \section{Einleitung}
+    
+    
+    \section{Musskriterien}
+    
+        \begin{itemize}
+			\item Verwalten von \gls{Web Processing Service} Workflows
+				\begin{itemize}
+					\item Erstellen, Bearbeiten, Speichern, Laden, Anzeigen von Workflows
+					\item Auflistung von Workflows mit Ausführungsstatus
+					\item Wiederherstellung der letzten Sitzung
+					\item Fehlermanagement
+					    \begin{itemize}
+                        	\item Editorprüfung auf Kompatibilität von Tasks innerhalb eines Workflows
+                        \end{itemize}
+					\item Workflows und \Gls{Task}s auf Syntax und Kompatibilität prüfen
+					\item Erstellen und Bearbeiten in grafischem \Gls{Drag and Drop} Editor
+					\item Dynamisches einbinden von neuen \gls{Web Processing Service} Tasks in den Editor
+				\end{itemize}
+			\item Der Login-Status des Nutzers wird erfasst
+			\item Nutzerfreundlichkeit
+				\begin{itemize}
+					\item Einfache, intuitive Benutzung des Editors
+				\end{itemize}
+			\item Open-Source
+			\item Hilfesektion für Benutzerfragen
+		\end{itemize}
+
+    \section{Wunschkriterien}
+    
+        \begin{itemize}
+			\item Logging aller Aktivitäten
+			\item Detailansicht einzelner Workflows
+			\item Erweiterte Konfigurationseinstellungen
+			\item Installations-/Einrichtungsassistent
+		\end{itemize}
+    
+    \section{Zusätzlich}
+    
+        \begin{itemize}
+            \item Auflistung der Resultate
+            \item Ausgabe von Fehlern
+            \item Sortieren der Prozesse nach Server
+            \item Beim Hinzufügen von neuen Servern wird automatisch validiert und falls nötig eine Fehlermeldung angezeigt
+            \item Falls der Nutzer aktiv einen Workflow bearbeitet wird vom Client jede Sekunde eine Anfrage an den Server geschickt der daraufhin wieder die Status der Tasks überprüft und Änderungen zurück gibt
+            \item Der Admin kann die Prozesse über einen Button in den Einstellungen aktualisieren
+        \end{itemize}
