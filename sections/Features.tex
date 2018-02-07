@@ -1,7 +1,8 @@
 \chapter{Implementierte Features}
     
     \section{Einleitung}
-    
+    In den meisten Projekten muss während der Entwicklung aufgrund unvorhergesehener Gegebenheiten so manches umstrukturiert werden.\newline
+    Daher findet man in den folgenden Auflistungen die Kriterien die wir aus dem Pflichtenheft umgesetzt haben, sowie einige Features die wir für nützlich befanden und hinzugefügt haben, jedoch auch Punkte die als zu komplex, aufwendig oder wenig nützlich erachtet und somit verworfen wurden.\newline
     
     \section{Musskriterien}
     
@@ -25,7 +26,7 @@
 					\item Einfache, intuitive Benutzung des Editors
 				\end{itemize}
 			\item Open-Source
-			\item Hilfesektion für Benutzerfragen
+			\item Technische Dokumentation (Benutzeranleitung)
 		\end{itemize}
 
     \section{Wunschkriterien}
@@ -33,6 +34,7 @@
         \begin{itemize}
 			\item Logging aller Aktivitäten
 			\item Detailansicht einzelner Workflows
+			\item Ein extra Interface für Administratoren
 			\item Erweiterte Konfigurationseinstellungen
 			\item Installations-/Einrichtungsassistent
 		\end{itemize}
@@ -45,15 +47,25 @@
             \item Sortieren der Prozesse nach Server
             \item Beim Hinzufügen von neuen Servern wird automatisch validiert und falls nötig eine Fehlermeldung angezeigt
             \item Falls der Nutzer aktiv einen Workflow bearbeitet wird vom Client jede Sekunde eine Anfrage an den Server geschickt der daraufhin wieder die Status der Tasks überprüft und Änderungen zurück gibt
-            \item Der Admin kann die Prozesse über einen Button in den Einstellungen aktualisieren
+            \item Der Admin kann die Prozesse über einen Button in den Einstellungen aktualisieren, was ansonsten alle 5 Minuten geschieht
         \end{itemize}
 
 
-    \section{Unterschiede Pflichtenheft/Implementierung}
+    \section{Nicht implementierte Kriterien}
         
         \begin{itemize}
-            \item 
-            \item 
-            \item 
-            \item 
+            \item Öffentliche und Benutzergebundene Workflows
+			    \begin{itemize}
+			        \item Workflows mit anderen Benutzern Teilen und öffentlich zugänglich machen
+			        \item Zugriff und Sichtbarkeit von Workflows auf eigenen oder einzelne Benutzer beschränken
+			    \end{itemize}
+            \item Der Nutzer hat die Möglichkeit WPS konforme Dateien als Workflows hochzuladen
+            
+            \item Integrierte Ausführung der Workflows auf dem gleichen Server nur nach erfolgter Prüfung von bestimmten Kriterien, z.B. Serverlast
+            \item Import und Export von Workflows
+            \item Hilfesektion für Benutzerfragen
+            %\item Momentan nur private und öffentliche Workflows möglich, kein Teilen mit einzelnen Nutzern
+        %    \item Keine Hilfesektion für Benutzerfragen, dafür jedoch eine Technische Anleitung der Client Funktionalitäten
+        %    \item Kein Import/Export von Workflows
+        %    \item Kein Einrichtungsassistent(aufgrund der Einfachheit der Anwendung ist dieses Feature jedoch auch nicht nötig)
         \end{itemize}
