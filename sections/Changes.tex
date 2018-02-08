@@ -1,9 +1,147 @@
 \chapter{Änderungen zum Entwurf}
     
-    \section{Einleitung}
-        Dokumentation über Änderungen am Entwurf
-    
     \section{Änderungen am Client}
+        Die Architektur des Clients nach der Implementierung entspricht der geplanten Architektur aus dem Entwurfsdokument. Auch die Anzahl der Klassen weicht nur leicht vom Entwurfsdokument ab. Die größte Abweichung liegt in der Komplexität der Klassen. Einige Methoden und Attribute sind neu dazugekommen, die nur schwer im Voraus zu planen waren.
+        
+        \subsection{Neue Komponenten}
+            \subsubsection{ProcessDialogComponent}
+                Eine Detailansicht des ausgewählten Prozesses. \\
+                
+    			Attribute:
+    			\begin{center}
+    				\renewcommand{\arraystretch}{1.5}
+    				\setlength\tabcolsep{5pt}
+    				\begin{tabularx}{\textwidth}{|l|l|X|}
+    					\hline
+    					\rowcolor[gray]{0.90}[4.85pt]	
+    					Name & Datentyp & Beschreibung \\ \hline
+    					process & Process & Der angezeigte Prozess \\ \hline
+    				\end{tabularx}
+    			\end{center}
+    			
+    	    \subsubsection{ResultDialogComponent}
+                Eine Auflistung der Resultate der aktuellen Ausführung. \\
+                
+    			Attribute:
+    			\begin{center}
+    				\renewcommand{\arraystretch}{1.5}
+    				\setlength\tabcolsep{5pt}
+    				\begin{tabularx}{\textwidth}{|l|l|X|}
+    					\hline
+    					\rowcolor[gray]{0.90}[4.85pt]		
+    					Name & Datentyp & Beschreibung \\ \hline
+    					workflow & Workflow & Ausgeführter Workflow \\ \hline
+    					results & Artefact<'output'>[] & Liste aller Resultate \\ \hline
+    				\end{tabularx}
+    			\end{center}
+    			
+    	 \subsection{Erweiterte Komponenten}
+    	 
+    	 % EditorComponent %
+    	 \subsubsection{EditorComponent}
+			Hinzugefügte Attribute:
+			\begin{center}
+				\setlength\tabcolsep{5pt}
+				\renewcommand{\arraystretch}{1.5}
+				
+				\begin{tabularx}{\textwidth}{|l|l|X|}
+					\hline
+					\rowcolor[gray]{0.90}[4.85pt]
+					Name & Datentyp & Beschreibung \\ \hline 
+					movement & MovementData & Metadaten zur Mausbewegung \\ \hline
+					snapshots & Workflow[] & Änderungsverlauf des Workflows \\ \hline
+                    taskComponents & QueryList<TaskComponent> & Liste der Tasks im aktuellen Workflow \\ \hline
+					workflowChanged & EventEmitter<Workflow>() & Wird bei jeder Änderung des Workflows ausgeführt \\ \hline
+					running & boolean & Gibt an, ob sich der aktuelle Workflow in der Ausführung befindet \\ \hline
+				\end{tabularx}
+			\end{center}
+			Hinzugefügte Methoden:
+			\begin{center}
+    			\setlength\tabcolsep{5pt}
+    			\renewcommand{\arraystretch}{1.5}
+    			
+    			\begin{tabularx}{\textwidth}{|l|l|l|X|}
+    				\hline
+    				\rowcolor[gray]{0.90}[4.85pt]
+    				Name & Rückgabetyp & Parameter & Beschreibung \\ \hline
+
+    				clickEdge & void & edge: Edge & Wird bei klick auf eine Edge aufgerufen \\ \hline
+    				scrollToMiddle & void & - & Zentriert das Sichtfeld des Editors \\ \hline
+    				changeArtefact & void & - & Wird aufgerufen, wenn ein Artefact geändert wurde \\ \hline
+    				snapshot & void & - & Erstellt ein Snapshot \\ \hline
+    				undo & void & - & Ziegt den letzten Snapshot an \\ \hline
+    			 \hline
+    			\end{tabularx}
+		    \end{center}
+		    
+    % ProcessComponent %
+    	 \subsubsection{ProcessComponent}
+			Hinzugefügte Methoden:
+			\begin{center}
+    			\setlength\tabcolsep{5pt}
+    			\renewcommand{\arraystretch}{1.5}
+    			\begin{tabularx}{\textwidth}{|l|l|l|X|}
+    				\hline
+    				\rowcolor[gray]{0.90}[4.85pt]
+    				Name & Rückgabetyp & Parameter & Beschreibung \\ \hline
+    				openDialog & void & - & Öffnet die Detailansicht \\ \hline
+    			 %\hline
+    			\end{tabularx}
+		    \end{center}
+		    
+
+    % ProcessListComponent %
+    	 \subsubsection{ProcessListComponent}
+			Hinzugefügte Methoden:
+			\begin{center}
+    			\setlength\tabcolsep{5pt}
+    			\renewcommand{\arraystretch}{1.5}
+    			\begin{tabularx}{\textwidth}{|l|l|l|X|}
+    				\hline
+    				\rowcolor[gray]{0.90}[4.85pt]
+    				Name & Rückgabetyp & Parameter & Beschreibung \\ \hline
+    				processByWPS & void & id & Gibt alle Prozesse eines bestimmten WPS Servers zurück \\ \hline
+    			 \hline
+    			\end{tabularx}
+		    \end{center}
+		    
+    % TaskComponent %
+    	 \subsubsection{TaskComponent}
+			Hinzugefügte Attribute:
+			\begin{center}
+				\setlength\tabcolsep{5pt}
+				\renewcommand{\arraystretch}{1.5}
+				
+				\begin{tabularx}{\textwidth}{|l|l|X|}
+					\hline
+					\rowcolor[gray]{0.90}[4.85pt]
+					Name & Datentyp & Beschreibung \\ \hline 
+					parameterDrag & EventEmitter & Hilfsfunktion für Drag and Drop \\ \hline
+					parameterDrop & EventEmitter & Hilfsfunktion für Drag and Drop \\ \hline
+                    taskRemove & EventEmitter & Wird beim Löschen des Tasks aufgerufen \\ \hline
+					changeArtefact & EventEmitter & Wird beim Ändern eines Artefacts aufgerufen \\ \hline
+					running & boolean & Gibt an, ob sich der Task in der Ausführung befindet \\ \hline
+				\end{tabularx}
+			\end{center}
+			Hinzugefügte Methoden:
+			\begin{center}
+    			\setlength\tabcolsep{5pt}
+    			\renewcommand{\arraystretch}{1.5}
+    			\begin{tabularx}{\textwidth}{|l|l|l|X|}
+    				\hline
+    				\rowcolor[gray]{0.90}[4.85pt]
+    				Name & Rückgabetyp & Parameter & Beschreibung \\ \hline
+
+    				hostContextmenu & void & - & Öffnet das Infomenü \\ \hline
+    				openDetail & void & - & Öffnet die Detailansicht \\ \hline
+    				addArtefact & void & ProcessParameter & Fügt ein Artefact dem Task hinzu \\ \hline
+    				removeArtefact & void & ProcessParameter & Löscht das Artefact \\ \hline
+    				hasArtefact & boolean & ProcessParameter & Gibt an, ob ein Artefact definiert ist \\ \hline
+    			 \hline
+    			\end{tabularx}
+		    \end{center}
+		    
+    \newpage
     
     \section{Änderungen am Server}
         Serverseitig wurde das System um das Modul utils.py erweitert, das grundsätzlich Funktionen für die Arbeit mit WPS Responses und der Datenbank gedacht ist. Funktionen sind leicht erweiterbar und können an anderen Stellen des Systems benutzt werden. \newline
@@ -16,16 +154,15 @@
 			\setlength\tabcolsep{5pt}
 			\renewcommand{\arraystretch}{1.5}
 
-            \begin{tabularx}{\textwidth}{|l|X|}
+            \begin{tabularx}{\textwidth}{|l|l|X|}
     			\hline
     			\rowcolor[gray]{0.90}[4.85pt]
-    			Method & Änderung \\ \hline
-    			GET /user & Handler -> UserView.get \\ \hline
-    			GET /workflow\_refresh/:id & Neu hinzugefügt. Aktualisiert den Status des Workflows und der Tasks entsprechnend dem aktuellen Stand auf dem WPS Server \\ \hline
-    			POST /process & Rausgenommen \\ \hline
-    			PATCH /process/:id & Rausgenommen \\ \hline
-    			DELETE /process/:id & Rausgenommen \\ \hline
-    			POST /login & Neu hinzugefügt. Loggt den Benutzer ein  \\ \hline
+    			Method & Änderung & Beschreibung \\ \hline
+    			GET /user & Hinzugefügt & Gibt den aktuellen Benutzer zurück \\ \hline
+    			POST /process & Entfernt & Prozesse werden jetzt ausschließlich über das Hinzufügen von WPS Servern erstellt \\ \hline
+    			PATCH /process/:id & Entfernt & Prozesse können aus Inkonsistenzgründen nicht mehr direkt geändert werden \\ \hline
+    			DELETE /process/:id & Entfernt & Prozesse können nicht direkt entfernt werden \\ \hline
+    			POST /login & Hinzugefügt & Loggt den Benutzer ein  \\ \hline
     		\end{tabularx}
 		\end{center}
 	
@@ -76,9 +213,9 @@
 				\setlength\tabcolsep{5pt}
 				\begin{tabularx}{\textwidth}{|l|l|l|X|}
 					\hline
-					\rowcolor[gray]{0.75}[4.85pt]					
+					\rowcolor[gray]{0.9}[4.85pt]					
 					Name & Änderung & Datentyp & Beschreibung \\ \hline
-					shared & hinzugefügt & boolean & Zeigt an ob der Workflow öffentlich ist oder privat ist\\ \hline
+					shared & Hinzugefügt & boolean & Zeigt an ob der Workflow öffentlich ist oder privat ist\\ \hline
 				\end{tabularx}
 			\end{center}
 
@@ -91,11 +228,11 @@
 				\setlength\tabcolsep{5pt}
 				\begin{tabularx}{\textwidth}{|l|l|X|}
 					\hline
-					\rowcolor[gray]{0.75}[4.85pt]
+					\rowcolor[gray]{0.9}[4.85pt]
 					Name & Änderung & Beschreibung \\ \hline
-					NONE & hinzugefügt & Der Task ist idle, bzw der Workflow wird vom Nutzer bearbeitet \\ \hline
-					READY & verändert & In diesem Zustand wartet ein Task auf den Input eines noch nicht beendeten Tasks  \\ \hline
-					WAITING & verändert & Der Task ist bereit ausgeführt zu werden \\ \hline
+					NONE & Hinzugefügt & Der Task ist idle, bzw der Workflow wird vom Nutzer bearbeitet \\ \hline
+					READY & Geändert & In diesem Zustand wartet ein Task auf den Input eines noch nicht beendeten Tasks  \\ \hline
+					WAITING & Geändert & Der Task ist bereit ausgeführt zu werden \\ \hline
 				\end{tabularx}
 			\end{center}
 %%% ENDE DER ENUMERATION EXECUTION STATUS
@@ -110,7 +247,7 @@
 				
 				\begin{tabularx}{\textwidth}{|l|l|l|l|X|}
 					\hline
-					\rowcolor[gray]{0.75}[4.85pt]
+					\rowcolor[gray]{0.9}[4.85pt]
 					Name & Änderung & Ersetzt & Rückgabetyp & Beschreibung \\ \hline 
 					service\_provider & umbenannt & wps\_provider & WPSProvider & Der Besitzer des WPS Servers \\ \hline
 					
@@ -128,9 +265,9 @@
 				
 				\begin{tabularx}{\textwidth}{|l|l|l|X|}
 					\hline
-					\rowcolor[gray]{0.75}[4.85pt]
+					\rowcolor[gray]{0.9}[4.85pt]
 					Name & Änderung & Rückgabetyp & Beschreibung \\ \hline 
-					format & hinzugefügt & string & Das Format eines inputs / outputs \\ \hline
+					format & Hinzugefügt & string & Das Format eines Inputs oder Outputs \\ \hline
 				\end{tabularx}
 			\end{center}
 			
@@ -147,9 +284,9 @@
 				
 				\begin{tabularx}{\textwidth}{|l|l|l|X|}
 					\hline
-					\rowcolor[gray]{0.75}[4.85pt]
+					\rowcolor[gray]{0.9}[4.85pt]
 					Name & Änderung  & Rückgabetyp & Beschreibung \\ \hline 
-					parameter & hinzugefügt & InputOutput & InputOutput Parameter des Tasks \\ \hline
+					parameter & Hinzugefügt & InputOutput & InputOutput Parameter des Tasks \\ \hline
 				\end{tabularx}
 			\end{center}
 %%% ENDE DER KLASSE ARTEFACT
